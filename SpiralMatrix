@@ -1,0 +1,46 @@
+Problem Description: Given a positive integer n, generate an n x n matrix filled with elements from 1 to n^2 in spiral order.
+
+Sample Input: n = 3
+
+Sample Output: [[1,2,3],[8,9,4],[7,6,5]]
+
+Code (C++):
+
+vector<vector<int> > Solution::generateMatrix(int A) {
+    vector<vector<int>> ans(A,vector<int>(A,0));
+    int dir = 0,left = 0, right = A-1, top = 0,bottom = A-1,value = 1;
+    while(left<=right && top<=bottom){
+        if(dir == 0){
+            for(int i=left;i<=right;i++){
+                ans[top][i] = value;
+                value++;
+            }
+            top++;
+        }
+        else if(dir == 1){
+            for(int i=top;i<=bottom;i++){
+                ans[i][right] = value;
+                value++;
+            }
+            right--;
+        }
+        else if(dir == 2){
+            for(int i=right;i>=left;i--){
+                ans[bottom][i] = value;
+                value++;
+            }
+            bottom--;
+        }
+        else{
+            for(int i=bottom;i>=top;i--){
+                ans[i][left] = value;
+                value++;
+            }
+            left++;
+        }   
+        dir = (dir+1)%4;
+    }
+    return ans;
+}
+
+Question Link: https://leetcode.com/problems/spiral-matrix-ii/
