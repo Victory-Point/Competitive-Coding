@@ -1,0 +1,58 @@
+Problem Description: Given an m x n integer matrix, if an element is 0, set its entire row and column to 0's, and return the matrix.
+You must do it in place.
+
+Sample Input: n = [[1,1,1],[1,0,1],[1,1,1]]
+
+Sample Output: [[1,0,1],[0,0,0],[1,0,1]]
+
+Code (C++):
+
+void Solution::setZeroes(vector<vector<int> > &A) {
+    bool hasZeroFirstrow = false,hasZeroFirstcolumn = false;
+    for(int i=0;i<A.size();i++){
+        if(A[i][0] == 0){
+            hasZeroFirstcolumn = true;
+            break;
+        }
+    }
+    for(int i=0;i<A[0].size();i++){
+        if(A[0][i] == 0){
+            hasZeroFirstrow = true;
+            break;
+        }
+    }
+    for(int i=1;i<A.size();i++){ 
+        for(int j=1;j<A[0].size();j++){
+            if(A[i][j] == 0){
+                A[0][j] = 0;
+                A[i][0] = 0;
+            }
+        }
+    }
+    for(int i=1;i<A.size();i++){
+        if(A[i][0] == 0){
+            for(int x=1;x<A[0].size();x++){
+                A[i][x] = 0;
+            }
+        }
+    }
+    for(int i=1;i<A[0].size();i++){
+        if(A[0][i] == 0){
+            for(int x=1;x<A.size();x++){
+                A[x][i] = 0;
+            }
+        }
+    }
+    if(hasZeroFirstcolumn == true){
+        for(int i=0;i<A.size();i++){
+            A[i][0] = 0;
+        }
+    }
+    if(hasZeroFirstrow == true){
+        for(int i=0;i<A[0].size();i++){
+            A[0][i] = 0;
+        }
+    }
+}
+
+Question Link: https://leetcode.com/problems/set-matrix-zeroes/
