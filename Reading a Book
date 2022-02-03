@@ -1,0 +1,33 @@
+Problem Description: You have a book which has N pages to read. You decided to start reading the 1st page from Monday. You are given a schedule, A, where A[i] = number of pages you can read on that day. You are very strict in reading the book and you will read as much as you can every day. Determine and return, which day of the week you will read the last page of the book. 
+Note: It is guaranteed that at least one of the number in A[i] is larger than zero.
+
+The days of the week are numbered starting with one in the order: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+
+Problem Constraints:  
+1 <= A <= 1000 
+1 <= B[i] <= 1000
+
+Sample Input: N = 100 , B = [15, 20, 20, 15, 10, 30, 45]
+
+Sample Output: 6
+
+Code (C++):
+
+int Solution::solve(int N, vector<int> &A) {
+    int sum = 0;
+	for(int i=0;i<A.size();i++){
+    		sum +=A[i];
+	}
+	N %= sum;
+	if(N == 0){
+		return 7;
+	} 
+    for(int i=0;i<A.size();i++){
+		if(N<=A[i]){
+			return i+1;
+		}		
+		N -= A[i];	
+		
+	}
+
+}
