@@ -1,0 +1,40 @@
+Problem Description: Given an array of size n, find the majority element. The majority element is the element that appears more than floor(n/2) times. You may assume that the array is non-empty and the majority element always exist in the array.
+
+Sample Input: [2, 1, 2]
+
+Sample Output: 2
+
+Explanation: 2 occurs 2 times which is greater than 3/2.
+
+CODE (C++):
+
+int Solution::majorityElement(const vector<int> &A) {
+    int candidate, count = 0;
+    for(int i=0;i<A.size();i++){
+        if(count == 0){
+            candidate = A[i];
+            count++;
+        }
+        else{
+            if(candidate != A[i]){
+                count--;
+            }
+            else{
+                count++;
+            }
+        }
+    }
+    count = 0;
+    for(int i=0;i<A.size();i++){
+        if(A[i] == candidate){
+            count++;
+        }
+    }
+    if(count > A.size()/2){
+        return candidate;
+    }
+    return -1;
+}
+
+
+Link to the question: https://leetcode.com/problems/majority-element/
